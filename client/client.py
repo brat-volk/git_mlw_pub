@@ -4,10 +4,10 @@ import socket
 import os
 import datetime
 
-victim_IP = 0.0.0.0
+victim_IP = input('victims ip: ' )
 host = victim_IP
-port = 901
-addr = (victim_IP, 901)
+port = input('port: ')
+addr = (victim_IP, port)
 socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 if(socket1.connect(addr)):
     print "Connected"
